@@ -1,7 +1,7 @@
 package people
 
 import (
-	"github.com/jinzhu/gorm"
+	"github.com/moisespsena-go/aorm"
 	"github.com/moisespsena/go-i18n-modular/i18nmod"
 	"github.com/moisespsena/go-path-helpers"
 	"github.com/moisespsena/template/html/template"
@@ -14,7 +14,7 @@ import (
 var DefaultTab = &tabs.Tab{
 	Default: true,
 	Title:   "All",
-	Handler: func(res *admin.Resource, context *qor.Context, db *gorm.DB) *gorm.DB {
+	Handler: func(res *admin.Resource, context *qor.Context, db *aorm.DB) *aorm.DB {
 		return db
 	},
 }
@@ -22,10 +22,10 @@ var DefaultTab = &tabs.Tab{
 var ImageTag, _ = template.New("qor:db:common.people.tag.image").Parse("<img src=\"{{.}}\"></img>")
 var PeopleTabs = []*tabs.Tab{
 	DefaultTab,
-	{"Individual", "", "", func(res *admin.Resource, context *qor.Context, db *gorm.DB) *gorm.DB {
+	{"Individual", "", "", func(res *admin.Resource, context *qor.Context, db *aorm.DB) *aorm.DB {
 		return db
 	}, false},
-	{"Business", "", "", func(res *admin.Resource, context *qor.Context, db *gorm.DB) *gorm.DB {
+	{"Business", "", "", func(res *admin.Resource, context *qor.Context, db *aorm.DB) *aorm.DB {
 		return db
 	}, false},
 }

@@ -3,7 +3,7 @@ package inheritance
 import (
 	"database/sql"
 
-	"github.com/jinzhu/gorm"
+	"github.com/moisespsena-go/aorm"
 )
 
 var EXTRA_COLUMNS_KEY = PREFIX
@@ -19,11 +19,11 @@ type Child struct {
 }
 
 type InheritedModel struct {
-	gorm.ExtraSelectModel
+	aorm.ExtraSelectModel
 	QorChild *Child `sql:"-"`
 }
 
-func (es *InheritedModel) SetGormExtraScannedValues(result map[string]*gorm.ExtraResult) {
+func (es *InheritedModel) SetGormExtraScannedValues(result map[string]*aorm.ExtraResult) {
 	es.ExtraSelectModel.SetGormExtraScannedValues(result)
 	if v, ok := es.ExtraScannedValues[EXTRA_COLUMNS_KEY]; ok {
 		for i, r := range v.Values {

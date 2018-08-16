@@ -3,7 +3,7 @@ package callbacks
 import (
 	"reflect"
 	"time"
-	"github.com/jinzhu/gorm"
+	"github.com/moisespsena-go/aorm"
 	"github.com/aghape/db/common/utils"
 	"github.com/aghape/common"
 )
@@ -27,7 +27,7 @@ func setUpdateInfo(user common.User, obj reflect.Value) {
 	})
 }
 
-func setUpdateInfoCallback(scope *gorm.Scope) {
+func setUpdateInfoCallback(scope *aorm.Scope) {
 	if user := common.GetUserFromScope(scope); user != nil {
 		if scope.Value == nil {
 			return
@@ -52,7 +52,7 @@ func setCreateInfo(user common.User, obj reflect.Value) {
 	utils.SetTimeValueIfEmpty(obj, "CreatedAt", &now)
 }
 
-func setCreateInfoCallback(scope *gorm.Scope) {
+func setCreateInfoCallback(scope *aorm.Scope) {
 	if user := common.GetUserFromScope(scope); user != nil {
 		if scope.Value == nil {
 			return
@@ -77,7 +77,7 @@ func setDeleteInfo(user common.User, obj reflect.Value) {
 	utils.SetTimeValueIfEmpty(obj, "DeletedAt", &now)
 }
 
-func setDeleteInfoCallback(scope *gorm.Scope) {
+func setDeleteInfoCallback(scope *aorm.Scope) {
 	if user := common.GetUserFromScope(scope); user != nil {
 		if scope.Value == nil {
 			return

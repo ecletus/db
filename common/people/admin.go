@@ -3,7 +3,7 @@ package people
 import (
 	"fmt"
 
-	"github.com/jinzhu/gorm"
+	"github.com/moisespsena-go/aorm"
 	"github.com/moisespsena/template/html/template"
 	"github.com/aghape/admin"
 	"github.com/aghape/admin/admincommon"
@@ -68,7 +68,7 @@ func PrepareResource(res *admin.Resource, pageTabs tabs.Tabs) {
 		Config: &admin.SelectOneConfig{
 			Collection: utils.TuplesIndex("Individual", "Business"),
 		},
-		Handler: func(db *gorm.DB, argument *admin.FilterArgument) *gorm.DB {
+		Handler: func(db *aorm.DB, argument *admin.FilterArgument) *aorm.DB {
 			v := argument.Value.Get("Value").Value.([]string)[0]
 			if v == "0" {
 				return db.Where("NOT business")

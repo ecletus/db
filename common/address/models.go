@@ -3,7 +3,7 @@ package address
 import (
 	"strings"
 
-	"github.com/jinzhu/gorm"
+	"github.com/moisespsena-go/aorm"
 	"github.com/aghape/db/common"
 	"github.com/aghape/db/common/mixins"
 	"github.com/aghape/db/common/phone"
@@ -16,7 +16,7 @@ type QorAddressPhone struct {
 	AddressID string `gorm:"size:24"`
 }
 
-func (p *QorAddressPhone) Clean(db *gorm.DB) {
+func (p *QorAddressPhone) Clean(db *aorm.DB) {
 	utils.TrimStrings(&p.Note, &p.Phone)
 }
 
@@ -31,7 +31,7 @@ type QorAddress struct {
 	AddressLine2 string                 `gorm:"size:255"`
 }
 
-func (e *QorAddress) Clean(db *gorm.DB) {
+func (e *QorAddress) Clean(db *aorm.DB) {
 	utils.TrimStrings(&e.ContactName, &e.AddressLine1, &e.AddressLine2)
 }
 

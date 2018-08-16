@@ -4,7 +4,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/jinzhu/gorm"
+	"github.com/moisespsena-go/aorm"
 	"github.com/aghape/db/common"
 	"github.com/aghape/db/common/address"
 	"github.com/aghape/db/common/mail"
@@ -108,11 +108,11 @@ func (p *QorPeople) AvatarURL(styles ...string) string {
 	}
 }
 
-func (m *QorPeople) Clean(db *gorm.DB) {
+func (m *QorPeople) Clean(db *aorm.DB) {
 	utils.TrimStrings(&m.FullName, &m.NickName)
 }
 
-func (p *QorPeople) Validate(db *gorm.DB) {
+func (p *QorPeople) Validate(db *aorm.DB) {
 	if strings.TrimSpace(p.FullName) == "" {
 		db.AddError(validations.Failed(p, "FullName", "Full Name is empty."))
 	}

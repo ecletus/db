@@ -1,7 +1,7 @@
 package people
 
 import (
-	"github.com/jinzhu/gorm"
+	"github.com/moisespsena-go/aorm"
 	"github.com/aghape/media/media_library"
 	"github.com/aghape/aghape"
 	"strings"
@@ -11,7 +11,7 @@ import (
 )
 
 type QorPeopleMedia struct {
-	gorm.Model
+	aorm.Model
 	QorPeopleID  string                            `gorm:"size:24"`
 	Title        string
 	SelectedType string
@@ -22,7 +22,7 @@ func (i *QorPeopleMedia) Init(site qor.SiteInterface) {
 	i.File.Init(site, db.FieldCache.Get(i, "File"))
 }
 
-func (i *QorPeopleMedia) Validate(db *gorm.DB) {
+func (i *QorPeopleMedia) Validate(db *aorm.DB) {
 	if strings.TrimSpace(i.Title) == "" {
 		db.AddError(validations.Failed(i, "Title", "Titulo não pode ser vazio."))
 	}

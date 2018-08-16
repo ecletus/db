@@ -1,12 +1,12 @@
 package callbacks
 
 import (
-	"github.com/jinzhu/gorm"
+	"github.com/moisespsena-go/aorm"
 	"github.com/aghape/validations"
 )
 
 // Register register callback into GORM DB
-func Register(db *gorm.DB) *gorm.DB {
+func Register(db *aorm.DB) *aorm.DB {
 	db = validations.RegisterCallbacks(db)
 	db.Callback().Create().Before(validations.VALIDATE_CALLBACK).Register(CLEAN_CALLBACK, cleanCallback)
 	db.Callback().Create().Before(validations.VALIDATE_CALLBACK).Register(SET_CREATION_INFO_CALLBACK, setCreateInfoCallback)

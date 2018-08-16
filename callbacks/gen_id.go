@@ -1,14 +1,14 @@
 package callbacks
 
 import (
-	"github.com/jinzhu/gorm"
+	"github.com/moisespsena-go/aorm"
 	"reflect"
 	"gopkg.in/mgo.v2/bson"
 )
 
 var GEN_SERIAL_CALLBACK = PREFIX + ".gen_serial"
 
-func IsGeneratedIdString(scope *gorm.Scope) bool  {
+func IsGeneratedIdString(scope *aorm.Scope) bool  {
 	value := scope.Value
 	reflectValue := reflect.ValueOf(value)
 
@@ -20,7 +20,7 @@ func IsGeneratedIdString(scope *gorm.Scope) bool  {
 	return pf != nil && pf.Field.Kind() == reflect.String && pf.Struct.Tag.Get("serial") == "yes"
 }
 
-func genSerial(scope *gorm.Scope) {
+func genSerial(scope *aorm.Scope) {
 	value := scope.Value
 	reflectValue := reflect.ValueOf(value)
 

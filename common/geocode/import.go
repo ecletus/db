@@ -7,7 +7,7 @@ import (
 	"path"
 	"runtime"
 
-	"github.com/jinzhu/gorm"
+	"github.com/moisespsena-go/aorm"
 	"github.com/aghape/aghape"
 	"github.com/aghape/aghape/db"
 	"github.com/aghape/aghape/helpers"
@@ -40,7 +40,7 @@ func LoadData() *Data {
 	return &d
 }
 
-func Import(db *gorm.DB, ret bool) (string, error) {
+func Import(db *aorm.DB, ret bool) (string, error) {
 	data := LoadData()
 	key, err := helpers.CheckReturnError(func() (key string, err error) {
 		for i, v := range data.CdhCountryCodes {

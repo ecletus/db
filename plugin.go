@@ -1,7 +1,7 @@
 package db
 
 import (
-	"github.com/jinzhu/gorm"
+	"github.com/moisespsena-go/aorm"
 	"github.com/moisespsena/go-default-logger"
 	"github.com/moisespsena/go-error-wrap"
 	"github.com/aghape/db/callbacks"
@@ -126,7 +126,7 @@ type DBEvent struct {
 
 type GormDBEvent struct {
 	plug.PluginEventInterface
-	DB *gorm.DB
+	DB *aorm.DB
 }
 
 type Plugin struct {
