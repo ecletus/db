@@ -1,12 +1,11 @@
 package db
 
 import (
-	"github.com/moisespsena-go/aorm"
-	"github.com/moisespsena/go-default-logger"
-	"github.com/moisespsena/go-error-wrap"
+	"github.com/aghape/aghape"
 	"github.com/aghape/db/callbacks"
 	"github.com/aghape/plug"
-	"github.com/aghape/aghape"
+	"github.com/moisespsena-go/aorm"
+	"github.com/moisespsena/go-default-logger"
 )
 
 var (
@@ -28,67 +27,6 @@ func (dn *DBNames) GetNames() []string {
 		dn.Names = []string{qor.DB_SYSTEM}
 	}
 	return dn.Names
-}
-
-type DisDBNames struct {
-	DBNames
-	plug.EventDispatcher
-}
-
-func (dn *DisDBNames) DBEachApllyE(en func(name string) string, cb func(e *DBEvent) error) {
-	for _, dbName := range dn.GetNames() {
-		dn.On(en(dbName), func(e plug.PluginEventInterface) error {
-			err := cb(e.(*DBEvent))
-			return errwrap.Wrap(err, e.Name())
-		})
-	}
-}
-
-func (dn *DisDBNames) DBEachAplly(en func(name string) string, cb func(e *DBEvent)) {
-	dn.DBEachApllyE(en, func(e *DBEvent) error {
-		cb(e)
-		return nil
-	})
-}
-
-func (dn *DisDBNames) DBEachGormApllyE(en func(name string) string, cb func(e *GormDBEvent) error) {
-	for _, dbName := range dn.GetNames() {
-		dn.On(en(dbName), func(e plug.PluginEventInterface) error {
-			err := cb(e.(*GormDBEvent))
-			return errwrap.Wrap(err, e.Name())
-		})
-	}
-}
-
-func (dn *DisDBNames) DBEachGormAplly(en func(name string) string, cb func(e *GormDBEvent)) {
-	dn.DBEachGormApllyE(en, func(e *GormDBEvent) error {
-		cb(e)
-		return nil
-	})
-}
-
-func (dn *DisDBNames) DBOnInitE(cb func(e *DBEvent) error) {
-	dn.DBEachApllyE(EInit, cb)
-}
-
-func (dn *DisDBNames) DBOnInit(cb func(e *DBEvent)) {
-	dn.DBEachAplly(EInit, cb)
-}
-
-func (dn *DisDBNames) DBOnInitGormE(cb func(e *GormDBEvent) error) {
-	dn.DBEachGormApllyE(EInitGorm, cb)
-}
-
-func (dn *DisDBNames) DBOnInitGorm(cb func(e *GormDBEvent)) {
-	dn.DBEachGormAplly(EInitGorm, cb)
-}
-
-func (dn *DisDBNames) DBOnMigrate(cb func(e *DBEvent) error) {
-	dn.DBEachApllyE(EMigrate, cb)
-}
-
-func (dn *DisDBNames) DBOnMigrateGorm(cb func(e *GormDBEvent) error) {
-	dn.DBEachGormApllyE(EMigrateGorm, cb)
 }
 
 func EInit(name string) string {
