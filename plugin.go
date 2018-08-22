@@ -1,7 +1,7 @@
 package db
 
 import (
-	"github.com/aghape/aghape"
+	"github.com/aghape/core"
 	"github.com/aghape/db/callbacks"
 	"github.com/aghape/plug"
 	"github.com/moisespsena-go/aorm"
@@ -24,7 +24,7 @@ type DBNames struct {
 
 func (dn *DBNames) GetNames() []string {
 	if len(dn.Names) == 0 {
-		dn.Names = []string{qor.DB_SYSTEM}
+		dn.Names = []string{core.DB_SYSTEM}
 	}
 	return dn.Names
 }
@@ -59,7 +59,7 @@ func EMigrateGorm(name string) string {
 
 type DBEvent struct {
 	plug.PluginEventInterface
-	DB *qor.DB
+	DB *core.DB
 }
 
 type GormDBEvent struct {
