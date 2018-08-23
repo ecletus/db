@@ -1,36 +1,14 @@
 package common
 
-import (
-	"gopkg.in/mgo.v2/bson"
+import "github.com/moisespsena-go/aorm"
+
+type (
+	IDStringSerial = aorm.KeyStringSerial
+	IDString       = aorm.KeyString
 )
 
-type IDStringSerial struct {
-	ID string `gorm:"size:24;primary_key" serial:"yes"`
-}
-
-func (p *IDStringSerial) GetID() string {
-	return p.ID
-}
-
-func (p *IDStringSerial) BeforeCreate() (err error) {
-	p.ID = bson.NewObjectId().Hex()
-	return nil
-}
-
-type IDString struct {
-	ID string `gorm:"size:24;primary_key"`
-}
-
-func (p *IDString) GetID() string {
-	return p.ID
-}
-
-func (p *IDString) SetID(value string) {
-	p.ID = value
-}
-
 type Model struct {
-	IDStringSerial
+	aorm.KeyStringSerial
 }
 
 type NamedModel struct {
