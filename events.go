@@ -65,18 +65,28 @@ func (dn *events) DBEachAplly(en func(name string) string, cb func(e *DBEvent)) 
 	})
 }
 
-func (dn *events) DBEachGormApllyE(en func(name string) string, cb func(e *GormDBEvent) error) *events {
+func (dn *events) DBEachGormApllyE(en func(name string) string, cb func(e *DBEvent) error) *events {
 	for _, dbName := range dn.GetNames() {
 		dn.On(en(dbName), func(e plug.EventInterface) error {
-			err := cb(e.(*GormDBEvent))
+			err := cb(e.(*DBEvent))
 			return errwrap.Wrap(err, e.Name())
 		})
 	}
 	return dn
 }
 
-func (dn *events) DBEachGormAplly(en func(name string) string, cb func(e *GormDBEvent)) *events {
-	return dn.DBEachGormApllyE(en, func(e *GormDBEvent) error {
+func (dn *events) DBEachRawApllyE(en func(name string) string, cb func(e *DBEvent) error) *events {
+	for _, dbName := range dn.GetNames() {
+		dn.On(en(dbName), func(e plug.EventInterface) error {
+			err := cb(e.(*DBEvent))
+			return errwrap.Wrap(err, e.Name())
+		})
+	}
+	return dn
+}
+
+func (dn *events) DBEachGormAplly(en func(name string) string, cb func(e *DBEvent)) *events {
+	return dn.DBEachGormApllyE(en, func(e *DBEvent) error {
 		cb(e)
 		return nil
 	})
@@ -90,18 +100,14 @@ func (dn *events) DBOnInit(cb func(e *DBEvent)) *events {
 	return dn.DBEachAplly(EInit, cb)
 }
 
-func (dn *events) DBOnInitGormE(cb func(e *GormDBEvent) error) *events {
+func (dn *events) DBOnInitGormE(cb func(e *DBEvent) error) *events {
 	return dn.DBEachGormApllyE(EInitGorm, cb)
 }
 
-func (dn *events) DBOnInitGorm(cb func(e *GormDBEvent)) *events {
+func (dn *events) DBOnInitGorm(cb func(e *DBEvent)) *events {
 	return dn.DBEachGormAplly(EInitGorm, cb)
 }
 
 func (dn *events) DBOnMigrate(cb func(e *DBEvent) error) *events {
 	return dn.DBEachApllyE(EMigrate, cb)
-}
-
-func (dn *events) DBOnMigrateGorm(cb func(e *GormDBEvent) error) *events {
-	return dn.DBEachGormApllyE(EMigrateGorm, cb)
 }
