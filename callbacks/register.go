@@ -1,7 +1,7 @@
 package callbacks
 
 import (
-	"github.com/aghape/validations"
+	"github.com/ecletus/validations"
 	"github.com/moisespsena-go/aorm"
 )
 

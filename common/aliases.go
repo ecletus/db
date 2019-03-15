@@ -1,6 +1,6 @@
 package common
 
-import "github.com/aghape/common"
+import "github.com/ecletus/common"
 
 type (
 	WithID       = common.WithID

@@ -1,9 +1,9 @@
 package db
 
 import (
-	"github.com/aghape/core"
-	"github.com/aghape/db/callbacks"
-	"github.com/aghape/plug"
+	"github.com/ecletus/core"
+	"github.com/ecletus/db/callbacks"
+	"github.com/ecletus/plug"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/moisespsena-go/aorm"
 	"github.com/moisespsena/go-default-logger"
