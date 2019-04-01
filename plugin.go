@@ -6,7 +6,7 @@ import (
 	"github.com/ecletus/plug"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/moisespsena-go/aorm"
-	"github.com/moisespsena/go-default-logger"
+	"github.com/moisespsena-go/default-logger"
 )
 
 const DEFAULT_DIALECT = "sqlite3"
