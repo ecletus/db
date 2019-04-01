@@ -5,7 +5,7 @@ import (
 
 	"github.com/ecletus/plug"
 	"github.com/moisespsena/go-edis"
-	"github.com/moisespsena/go-error-wrap"
+	"github.com/moisespsena-go/error-wrap"
 )
 
 type events struct {
