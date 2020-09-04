@@ -15,7 +15,7 @@ type ParentModelInterface interface {
 
 type Child struct {
 	Index int
-	ID    string
+	ID    aorm.ID
 }
 
 type InheritedModel struct {
@@ -23,12 +23,13 @@ type InheritedModel struct {
 	QorChild *Child `sql:"-"`
 }
 
-func (es *InheritedModel) SetGormExtraScannedValues(result map[string]*aorm.ExtraResult) {
-	es.ExtraSelectModel.SetGormExtraScannedValues(result)
+func (es *InheritedModel) SetAormExtraScannedValues(result map[string]*aorm.ExtraResult) {
+	panic("TODO: implement field struct. see above")
+	es.ExtraSelectModel.SetAormExtraScannedValues(result)
 	if v, ok := es.ExtraScannedValues[EXTRA_COLUMNS_KEY]; ok {
-		for i, r := range v.Values {
+		for _, r := range v.Values {
 			if ref, ok := r.(sql.NullString); ok && ref.Valid {
-				es.QorChild = &Child{i, ref.String}
+				//es.QorChild = &Child{i, aorm.StrID(ref.String)}
 				return
 			}
 		}

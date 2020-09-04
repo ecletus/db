@@ -2,6 +2,7 @@ package db
 
 import (
 	"github.com/ecletus/core"
+	"github.com/ecletus/core/db/dbconfig"
 	"github.com/ecletus/db/callbacks"
 	"github.com/ecletus/plug"
 	_ "github.com/mattn/go-sqlite3"
@@ -19,7 +20,7 @@ var (
 	E_MIGRATE_RAW  = PREFIX + ":migrateRaw"
 	E_MIGRATE_DB   = E_MIGRATE + ":db"
 	E_MIGRATE_GORM = E_MIGRATE + ":gorm"
-	log            = defaultlogger.NewLogger(PREFIX)
+	log            = defaultlogger.GetOrCreateLogger(PREFIX)
 )
 
 type DBNames struct {
@@ -28,7 +29,7 @@ type DBNames struct {
 
 func (dn *DBNames) GetNames() []string {
 	if len(dn.Names) == 0 {
-		dn.Names = []string{core.DB_SYSTEM}
+		dn.Names = []string{dbconfig.DB_SYSTEM}
 	}
 	return dn.Names
 }

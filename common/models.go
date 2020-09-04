@@ -3,12 +3,12 @@ package common
 import "github.com/moisespsena-go/aorm"
 
 type (
-	IDStringSerial = aorm.KeyStringSerial
-	IDString       = aorm.KeyString
+	IDStringSerial = aorm.BIDSerial
+	IDString       = aorm.BID
 )
 
 type Model struct {
-	aorm.KeyStringSerial
+	aorm.BIDSerial
 }
 
 type NamedModel struct {
